@@ -21,7 +21,8 @@ namespace RealVideo.WebTest.TestFramework
         {
             base.OnHelperCreation(test);
 
-            this.Driver = new InternetExplorerDriver();
+            this.Driver = new FirefoxDriver();
+            this.Driver.Manage().Window.Maximize();
             this.Driver.Navigate().GoToUrl(RealVideoURL);
             PageObjectFactory.UIMapFilePath = UIMappFilePath;
 
@@ -36,7 +37,13 @@ namespace RealVideo.WebTest.TestFramework
                 {
                     video.Bookmark();
                 }
+
             });
+
+            test.AddTestCleanup("Close browser", () =>
+                {
+                    this.Driver.Close();
+                });
         }
     }
 }

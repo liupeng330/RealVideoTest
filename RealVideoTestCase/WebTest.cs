@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
 using RealVideo.WebTest.TestFramework;
 
 namespace RealVideo.WebTest.TestCase
@@ -230,6 +221,9 @@ namespace RealVideo.WebTest.TestCase
             //3. Click bookmark button in drawer
             drawer.BookMark();
 
+            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
+            Thread.Sleep(1000);
+
             //4. Verify if button change to unbookmark
             Assert.AreEqual(true, drawer.IsBookMarked, "The button should be unbookmark button");
 
@@ -256,6 +250,9 @@ namespace RealVideo.WebTest.TestCase
 
             //3. Click unbookmark button in drawer
             drawer.UnBookMark();
+
+            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
+            Thread.Sleep(1000);
 
             //4. Verify if button change to unbookmark
             Assert.AreEqual(false, drawer.IsBookMarked, "The button should be bookmark button");
@@ -290,6 +287,9 @@ namespace RealVideo.WebTest.TestCase
             //4. Click unbookmark button in drawer
             drawer.UnBookMark();
 
+            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
+            Thread.Sleep(1000);
+
             //5. Verify if button change to unbookmark
             Assert.AreEqual(false, drawer.IsBookMarked, "The button should be bookmark button");
 
@@ -322,6 +322,9 @@ namespace RealVideo.WebTest.TestCase
 
             //4. Unbookmark video
             CellInBookmarkPage[0].Bookmark();
+
+            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
+            Thread.Sleep(1000);
 
             //5. Verify if bookmark button is shown
             VideoDrawer drawer = bookmarkPage.GetVideoDrawer();
