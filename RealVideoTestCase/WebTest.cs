@@ -27,7 +27,7 @@ namespace RealVideo.WebTest.TestCase
             var navBar = Get<NavigationBar>(WebTestHelper.Driver);
             navBar.GoToBookmarkPage();
 
-            //1. Verify if no video in bookmard page
+            //2. Verify if no video in bookmard page
             BookmarkPage bookmarkPage = Get<BookmarkPage>(WebTestHelper.Driver);
             Assert.AreEqual(0, bookmarkPage.GetAllVideos().ToArray().Length, "The count of videos in bookmark page should be 0.");
         }
