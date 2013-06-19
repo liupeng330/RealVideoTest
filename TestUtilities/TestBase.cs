@@ -85,6 +85,17 @@ namespace WebTest.TestUtilities
             }
         }
 
+        [TestFixtureTearDown]
+        public void TestFixtureCleanup()
+        {
+            OnTestFixtureCleanup();
+        }
+
+        public virtual void OnTestFixtureCleanup()
+        { 
+
+        }
+
         private void DoTestCleanup(string name, Action action, ref int cleanupFailures, ref StringBuilder cleanupMessages)
         {
             try

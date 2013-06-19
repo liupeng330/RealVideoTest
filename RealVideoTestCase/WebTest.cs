@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using RealVideo.WebTest.TestFramework;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace RealVideo.WebTest.TestCase
 {
@@ -220,9 +222,7 @@ namespace RealVideo.WebTest.TestCase
 
             //3. Click bookmark button in drawer
             drawer.BookMark();
-
-            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
-            Thread.Sleep(1000);
+            drawer.WaitForChangeToUnBookMark();
 
             //4. Verify if button change to unbookmark
             Assert.AreEqual(true, drawer.IsBookMarked, "The button should be unbookmark button");
@@ -250,9 +250,7 @@ namespace RealVideo.WebTest.TestCase
 
             //3. Click unbookmark button in drawer
             drawer.UnBookMark();
-
-            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
-            Thread.Sleep(1000);
+            drawer.WaitForChangeToBookMark();
 
             //4. Verify if button change to unbookmark
             Assert.AreEqual(false, drawer.IsBookMarked, "The button should be bookmark button");
@@ -286,9 +284,7 @@ namespace RealVideo.WebTest.TestCase
 
             //4. Click unbookmark button in drawer
             drawer.UnBookMark();
-
-            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
-            Thread.Sleep(1000);
+            drawer.WaitForChangeToBookMark();
 
             //5. Verify if button change to unbookmark
             Assert.AreEqual(false, drawer.IsBookMarked, "The button should be bookmark button");
@@ -322,9 +318,6 @@ namespace RealVideo.WebTest.TestCase
 
             //4. Unbookmark video
             CellInBookmarkPage[0].Bookmark();
-
-            //TODO: Need to add a retry logic to wait bookmark button change to unbookmark button
-            Thread.Sleep(1000);
 
             //5. Verify if bookmark button is shown
             VideoDrawer drawer = bookmarkPage.GetVideoDrawer();

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using WebTest.TestUtilities;
 using RealVideo.WebTest.TestFramework;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Firefox;
 
 namespace RealVideo.WebTest.TestCase
 {
@@ -15,6 +17,12 @@ namespace RealVideo.WebTest.TestCase
         {
             base.OnTestInitialize();
             WebTestHelper = Get<WebTestHelper>();
+        }
+
+        public override void OnTestFixtureCleanup()
+        {
+            base.OnTestFixtureCleanup();
+            WebTestHelper.Driver.Quit();
         }
     }
 }

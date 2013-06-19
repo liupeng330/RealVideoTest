@@ -5,15 +5,15 @@ using System.Text;
 using WebTest.TestUtilities;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
-using PageObjectFactory = Selenium.Tools.PageFactory;
 using OpenQA.Selenium.Remote;
+using PageObjectFactory = Selenium.Tools.PageFactory;
 
 namespace RealVideo.WebTest.TestFramework
 {
     public class WebTestHelper : TestHelper
     {
-        private const string RealVideoURL = "http://videos.real.com/rp/web_videos?u=demo";
         private const string UIMappFilePath = @"..\..\..\RealVideoTestFramework\UIMaps";
+        private const string RealVideoURL = "http://videos.real.com/rp/web_videos?u=demo";
 
         public RemoteWebDriver Driver { get; private set; }
 
@@ -23,7 +23,9 @@ namespace RealVideo.WebTest.TestFramework
 
             this.Driver = new FirefoxDriver();
             this.Driver.Manage().Window.Maximize();
+            this.Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             this.Driver.Navigate().GoToUrl(RealVideoURL);
+
             PageObjectFactory.UIMapFilePath = UIMappFilePath;
 
             test.AddTestCleanup("UnBookmark all videos", () =>
@@ -38,12 +40,8 @@ namespace RealVideo.WebTest.TestFramework
                     video.Bookmark();
                 }
 
+                nav.GoToDailyVideoPage();
             });
-
-            test.AddTestCleanup("Close browser", () =>
-                {
-                    this.Driver.Close();
-                });
         }
     }
 }

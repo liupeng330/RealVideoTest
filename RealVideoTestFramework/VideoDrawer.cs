@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace RealVideo.WebTest.TestFramework
 {
     public class VideoDrawer
     {
+        private WebDriverWait wait;
+
         private IWebElement BookMarkButtonParent
         {
             get
@@ -17,7 +20,7 @@ namespace RealVideo.WebTest.TestFramework
             }
         }
 
-        private IWebElement BookMarkButton
+        public IWebElement BookMarkButton
         {
             get
             {
@@ -34,7 +37,7 @@ namespace RealVideo.WebTest.TestFramework
             }
         }
 
-        private IWebElement UnBookMarkButton
+        public IWebElement UnBookMarkButton
         {
             get
             {
@@ -65,6 +68,7 @@ namespace RealVideo.WebTest.TestFramework
         {
             this.parent = parent;
             this.driver = driver;
+            this.wait = new WebDriverWait(driver, new TimeSpan(0, 0, 1));
         }
 
         public void BookMark()
@@ -85,6 +89,16 @@ namespace RealVideo.WebTest.TestFramework
                 string styleOfUnBookmarkButton = this.UnBookMarkButtonParent.GetAttribute("style");
                 return styleOfBookmarkButton.Contains("none") && styleOfUnBookmarkButton.Contains("block");
             }
+        }
+
+        public void WaitForChangeToUnBookMark()
+        {
+            wait.Until((d) => { return IsBookMarked; });
+        }
+
+        public void WaitForChangeToBookMark()
+        {
+            wait.Until((d) => { return !IsBookMarked; });
         }
     }
 }
