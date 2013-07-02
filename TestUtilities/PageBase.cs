@@ -16,5 +16,18 @@ namespace WebTest.TestUtilities
         {
             this.webDriver = driver;
         }
+
+        public bool PresenceOfElementLocated(By by)
+        {
+            try
+            {
+                this.webDriver.FindElement(by);
+            }
+            catch (StaleElementReferenceException)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

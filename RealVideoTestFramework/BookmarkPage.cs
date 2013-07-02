@@ -4,26 +4,18 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 using WebTest.TestUtilities;
+using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 namespace RealVideo.WebTest.TestFramework
 {
     public class BookmarkPage : PageBase
     {
-        private IWebElement refreshButton
-        {
-            get
-            {
-                return this.webDriver.FindElement(By.XPath("//div[@id='bookmarks-content']//a[@class='refresh']"));
-            }
+        [FindsBy(How = How.XPath, Using = "//div[@id='bookmarks-content']//a[@class='refresh']")]
+        private IWebElement refreshButton;
 
-        }
-        private IWebElement rootElement
-        {
-            get
-            {
-                return this.webDriver.FindElement(By.XPath("//div[@id='bookmarks-content']/div[@class='sections']"));
-            }
-        }
+        [FindsBy(How = How.XPath, Using = "//div[@id='bookmarks-content']/div[@class='sections']")]
+        private IWebElement rootElement;
 
         public BookmarkPage(IWebDriver driver)
             : base(driver)
@@ -37,6 +29,11 @@ namespace RealVideo.WebTest.TestFramework
 
         public IEnumerable<VideoCell> GetAllVideos()
         {
+            WebDriverWait wait = new WebDriverWait(webDriver, new TimeSpan(0, 0, 10));
+            wait.Until((d) =>
+            {
+                return this.PresenceOfElementLocated(By.XPath("//div[@id='bookmarks-content']/div[@class='sections']"));
+            });
             foreach (var parent in rootElement.FindElements(By.TagName("a")))
             {
                 yield return new VideoCell(parent, webDriver);

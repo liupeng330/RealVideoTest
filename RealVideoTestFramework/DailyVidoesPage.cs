@@ -4,26 +4,17 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 using WebTest.TestUtilities;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace RealVideo.WebTest.TestFramework
 {
     public class DailyVidoesPage : PageBase
     {
-        private IWebElement rootElement
-        {
-            get
-            {
-                return this.webDriver.FindElement(By.XPath("//div[@id='daily-videos-content']/div[@class='sections']"));
-            }
-        }
+        [FindsBy(How = How.XPath, Using = "//div[@id='daily-videos-content']/div[@class='sections']")]
+        private IWebElement rootElement;
 
-        private IWebElement todayTop5Section
-        {
-            get
-            {
-                return this.webDriver.FindElement(By.XPath("//div[@id='daily-videos-content']/div[@class='sections']/div[@class='featured section']"));
-            }
-        }
+        [FindsBy(How = How.XPath, Using = "//div[@id='daily-videos-content']/div[@class='sections']/div[@class='featured section']")]
+        private IWebElement todayTop5Section;
 
         public DailyVidoesPage(IWebDriver driver) : base(driver) { }
 

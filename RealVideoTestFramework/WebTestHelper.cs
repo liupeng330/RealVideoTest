@@ -33,7 +33,7 @@ namespace RealVideo.WebTest.TestFramework
                 NavigationBar nav = test.Get<NavigationBar>(Driver);
                 nav.GoToBookmarkPage();
 
-                BookmarkPage bookmarkpage = Test.Get<BookmarkPage>(Driver);
+                BookmarkPage bookmarkpage = test.Get<BookmarkPage>(Driver);
                 var allVideos = bookmarkpage.GetAllVideos().ToArray();
                 foreach (var video in allVideos)
                 {

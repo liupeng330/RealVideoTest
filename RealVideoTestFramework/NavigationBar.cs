@@ -4,26 +4,32 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 using WebTest.TestUtilities;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace RealVideo.WebTest.TestFramework
 {
     public class NavigationBar : PageBase
     {
+        [FindsBy(How = How.Id, Using = "tab-channel_bestofweb")]
         private IWebElement dailyVideosButton;
+
+        [FindsBy(How = How.Id, Using = "tab-channel_popular")]
         private IWebElement newAndPopularButton;
+
+        [FindsBy(How = How.Id, Using = "tab-channels")]
         private IWebElement channelsButton;
+
+        [FindsBy(How = How.Id, Using = "tab-bookmarks")]
         private IWebElement bookmarksButton;
+
+        [FindsBy(How = How.Id, Using = "tab-facebook")]
         private IWebElement facebookButton;
+
+        [FindsBy(How = How.Id, Using = "tab-search")]
         private IWebElement searchButton;
         
         public NavigationBar(IWebDriver driver) : base(driver) 
         {
-            this.dailyVideosButton = this.webDriver.FindElement(By.Id("tab-channel_bestofweb"));
-            this.newAndPopularButton = this.webDriver.FindElement(By.Id("tab-channel_popular"));
-            this.channelsButton = this.webDriver.FindElement(By.Id("tab-channels"));
-            this.bookmarksButton = this.webDriver.FindElement(By.Id("tab-bookmarks"));
-            this.facebookButton = this.webDriver.FindElement(By.Id("tab-facebook"));
-            this.searchButton = this.webDriver.FindElement(By.Id("tab-search"));
         }
 
         public void GoToBookmarkPage()

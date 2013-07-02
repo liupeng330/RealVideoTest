@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace WebTest.TestUtilities
 {
@@ -177,13 +178,7 @@ namespace WebTest.TestUtilities
 
             if (!typedCache.TryGetValue(typeof(Tpage), out value))
             {
-                Type type = typeof(Tpage);
-                ConstructorInfo constructorInfo = type.GetConstructor(BindingFlags.Instance | BindingFlags.Public,
-                    null,
-                    CallingConventions.HasThis,
-                    new Type[] { driver.GetType() },
-                    null);
-                value = constructorInfo.Invoke(new object[] { driver }) as Tpage;
+                value = PageFactory.InitElements<Tpage>(driver);
                 typedCache.Add(typeof(Tpage), value);
             }
 
